@@ -1,0 +1,17 @@
+trigger:
+  branches:
+    include: [ master ]
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: |
+    npm install
+    npm test
+  displayName: 'Install Dependencies & Test Runs'
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: drop
+
